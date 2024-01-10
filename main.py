@@ -86,7 +86,7 @@ if st.button('Submit'):
         body = f"Your next medicine '{next_medicine['Medicine']}' is due to be taken in {int(next_medicine['TimeDifference'])} minutes."
     else:
         try:
-            tomorrow_first_medicine = df.loc[df['TimeDifference'].idxmin() % len(df)]
+            tomorrow_first_medicine = df.loc[df['TimeDifference'].abs().idxmin() % len(df)]
             body = f"You are done for your medicines for today. Tomorrow, the first medicine scheduled for you is '{tomorrow_first_medicine['Medicine']}' at {tomorrow_first_medicine['Time']}."
         except:
             body = f"You've taken all your mediciness for today!"
