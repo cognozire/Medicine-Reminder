@@ -80,16 +80,16 @@ if st.button('Submit'):
 
     df['TimeDifference'] = df['Time'].apply(lambda x: calculate_time_difference(current_time, x))
 
-    next_medicine = df.loc[df['TimeDifference'].idxmin()]
+    next_medicine = df.loc[df['TimeDifference'].abs().idxmin()]
 
     if next_medicine['TimeDifference'] > 0:
         body = f"Your next medicine '{next_medicine['Medicine']}' is due to be taken in {int(next_medicine['TimeDifference'])} minutes."
     else:
         try:
-            tomorrow_first_medicine = df.loc[df['TimeDifference'].abs().idxmin() % len(df)]
+            tomorrow_first_medicine = df.loc[df['TimeDifference'].idxmin() % len(df)]
             body = f"You are done for your medicines for today. Tomorrow, the first medicine scheduled for you is '{tomorrow_first_medicine['Medicine']}' at {tomorrow_first_medicine['Time']}."
         except:
-            body = f"You've taken all your mediciness for today!"
+            body = f"You've taken all your medicines for today!"
 
     account_sid = 'ACcf8cec3487efd20c185335832108a4e1'
     auth_token = st.secrets["token"]
