@@ -92,7 +92,7 @@ if st.button('Submit'):
             body = f"You've taken all your mediciness for today!"
 
     account_sid = 'ACcf8cec3487efd20c185335832108a4e1'
-    auth_token = '9a77da4a8b592984f9409f18acf5bce5'
+    auth_token = st.secrets["token"]
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
